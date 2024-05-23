@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      lang="es">
+<head th:replace="~{page-template :: head}"></head>
+</head>
+<body>
+<header th:replace="~{page-template :: header}"></header>
+<main class="container text-center opacity-75 shadow-lg p-3 mb-5 bg-body-tertiary rounded">
+    <h1 class="card-header"><strong><p th:text="${contenido}"></p></strong></h1>
+    <div class="card-body">
+        <form th:action="@{/marca/save}" th:object="${marca}" method="post">
+            <div class="row gx-5">
+                <div class="col-md-5">
+                    <div class="form-group">
+                        <label for="descripcion">Descripción</label>
+                        <input type="text" class="form-control" id="descripcion" name="descripcion"
+                               placeholder="descripcion" required
+                               th:field="*{descripcion}">
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <br/>
+                    <button type="submit" class="btn btn-primary">Guardar</button>
+                </div>
+            </div>
+            <input type="hidden" name="idMarca" th:field="*{idMarca}"/>
+        </form>
+    </div>
+</main>
+<footer th:replace="~{page-template :: footer}"></footer>
+</body>
+</html>

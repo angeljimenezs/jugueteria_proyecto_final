@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      lang="es">
+<head th:replace="~{page-template :: head}"></head>
+</head>
+<body>
+<header th:replace="~{page-template :: header}"></header>
+<main class="container text-center opacity-75 shadow-lg p-3 mb-5 bg-body-tertiary rounded">
+    <h1 th:text="${contenido}"></h1>
+    <!-- Usa d-flex y justify-content-end para alinear el botón a la derecha -->
+    <div th:if="${total > 0}" class="d-flex justify-content-end w-100">
+        <a th:href="@{/orden/summary}" class="btn btn btn-outline-success btn-lg mt-auto">Checkout</a>
+    </div>
+    <table th:if="${!carritos.isEmpty()}" class="table table-striped table-hover table-sm">
+        <thead class="table-dark table-bordered">
+        <tr>
+            <th scope="col">Titulo</th>
+            <th scope="col">Imagen</th>
+            <th scope="col">Precio unitario</th>
+            <th scope="col">Cantidad</th>
+            <th scope="col">Subtotal</th>
+            <th scope="col">Operaciones</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="item: ${carritos}">
+            <td th:text="${item.producto.titulo}"></td>
+            <td><img th:src="@{${item.producto.imagen}}" alt="imagen" width="20%" height="20%"></td>
+            <td th:text="'$' + ${item.producto.precio}"></td>
+            <td th:text="${item.cantidad}"></td>
+            <td th:text="'$' + ${item.cantidad * item.precioVenta}"></td>
+            <td>
+                <form th:action="@{/carrito/add/{idp}/1 (idp=${item.producto.idProducto})}" method="post">
+                    <div class="text-center">
+                        <button type="submit" class="btn btn-success mt-auto"><i class="bi bi-plus-square"
+                                                                                      aria-hidden="true"></i></button>
+                    </div>
+                </form>
+                <form th:action="@{/carrito/remove/{idp}/1 (idp=${item.producto.idProducto})}" method="post">
+                    <div class="text-center">
+                        <button type="submit" class="btn btn-danger mt-auto"><i class="bi bi-dash-square"
+                                                                                aria-hidden="true"></i></button>
+                    </div>
+                </form>
+
+<!--                <a th:href="@{/carrito/remove/{idp}/1 (idp=${item.producto.idProducto})}"-->
+<!--                   class="btn btn-danger">Eliminar <i class="bi bi-dash-square"-->
+<!--                                                      aria-hidden="true"></i> </a>-->
+
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <!-- Mostrar el total solo si es mayor a 0 -->
+    <span th:if="${total > 0}" th:text="'$' + ${total}"></span>
+    <!-- Mostrar "nada en el carrito" si total es 0 -->
+    <span th:if="${total == 0}">Nada en el carrito ¡Agrega productos!</span>
+    <nav th:replace="~{pag-nav::paginador}"></nav>
+</main>
+<footer th:replace="~{page-template :: footer}"></footer>
+</body>
+</html>

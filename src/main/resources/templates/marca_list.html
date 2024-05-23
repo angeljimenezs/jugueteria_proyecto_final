@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      lang="es">
+<head th:replace="~{page-template :: head}"></head>
+</head>
+<body>
+<header th:replace="~{page-template :: header}"></header>
+<main class="container text-center opacity-75 shadow-lg p-3 mb-5 bg-body-tertiary rounded">
+    <h1 th:text="${contenido}"></h1>
+    <table th:if="${!marcas.isEmpty()}" class="table table-striped table-hover table-sm">
+        <thead class="table-dark table-bordered">
+        <tr>
+            <th scope="col">Identificador</th>
+            <th scope="col">Descripción</th>
+            <th scope="col">Operaciones</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="item: ${marcas}">
+            <td th:text="${item.idMarca}"></td>
+            <td th:text="${item.descripcion}"></td>
+            <td>
+                <a th:href="@{/marca/modify/{id} (id=${item.idMarca})}"
+                   class="btn btn-success">Modificar <i class="fas fa-pen-nib"
+                                                        aria-hidden="true"></i> </a>
+                <a th:href="@{/marca/delete/{id} (id=${item.idMarca})}"
+                   class="btn btn-danger">Eliminar <i class="fas fa-trash-alt"
+                                                      aria-hidden="true"></i> </a>
+
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <nav th:replace="~{pag-nav::paginador}"></nav>
+<footer th:replace="~{page-template :: footer}"></footer>
+</body>
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      lang="es">
+<head th:replace="~{page-template :: head}"></head>
+</head>
+<body>
+<header th:replace="~{page-template :: header}"></header>
+<main class="container text-center opacity-75 shadow-lg p-3 mb-5 bg-body-tertiary rounded">
+    <h1 th:text="${contenido}"></h1>
+    <table th:if="${!pagos.isEmpty()}" class="table table-striped table-hover table-sm">
+        <thead class="table-dark table-bordered">
+        <tr>
+            <th scope="col">Identificador</th>
+            <th scope="col">Número de tarjeta</th>
+            <th scope="col">Titular Nombre</th>
+            <th scope="col">Titular Apellido</th>
+            <th scope="col">Caducidad</th>
+            <th scope="col">CVV</th>
+            <th scope="col">Tipo de tarjeta</th>
+            <th scope="col">Operaciones</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="item: ${pagos}">
+            <td th:text="${item.idPago}"></td>
+            <td th:text="${item.numeroTarjeta}"></td>
+            <td th:text="${item.titularNombre}"></td>
+            <td th:text="${item.titularApellido}"></td>
+            <td th:text="${item.caducidad}"></td>
+            <td th:text="${item.cvv}"></td>
+            <td th:text="${item.tipoDeTarjeta}"></td>
+            <td>
+                <a th:href="@{/pago/modify/{id} (id=${item.idPago})}"
+                   class="btn btn-success">Modificar <i class="fas fa-pen-nib"
+                                                        aria-hidden="true"></i> </a>
+                <a th:href="@{/pago/delete/{id} (id=${item.idPago})}"
+                   class="btn btn-danger">Eliminar <i class="fas fa-trash-alt"
+                                                      aria-hidden="true"></i> </a>
+
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <nav th:replace="~{pag-nav::paginador}"></nav>
+<footer th:replace="~{page-template :: footer}"></footer>
+</body>
+</html>

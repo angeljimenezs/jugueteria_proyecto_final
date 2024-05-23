@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      lang="es">
+<head th:replace="~{page-template :: head}"></head>
+</head>
+<body>
+<header th:replace="~{page-template :: header}"></header>
+<main class="container text-center opacity-75 shadow-lg p-3 mb-5 bg-body-tertiary rounded">
+    <h1 class="card-header"><strong><p th:text="${contenido}"></p></strong></h1>
+    <div class="card-body">
+        <form th:action="@{/orden/send}" th:object="${orden}" method="post">
+            <div th:if="${#fields.hasErrors('*')}" class='alert alert-danger' role="alert">
+                Verifique los siguientes errores
+                <ul>
+                    <li th:each="err : ${#fields.errors('*')}" th:text="${err}"/>
+                </ul>
+            </div>
+            <div class="row gx-5">
+                <div class="col-md-5">
+<!--                    <div class="form-group">-->
+<!--                        <label for="sku">SKU</label>-->
+<!--                        <input type="text" class="form-control" id="sku" name="sku"-->
+<!--                               placeholder="SKU" required-->
+<!--                               th:value="${producto.sku}">-->
+<!--                    </div>-->
+
+                    <div class="form-group">
+                        <label for="direccion">Direcciones Disponibles</label>
+                        <select class="form-select" th:field="*{direccion}" id="direccion" name="direccion" required="required">
+                            <option th:each="sel : ${direccionList}" th:value="${sel.idDireccion}" th:text="${sel}"></option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="pago">Pagos Disponibles</label>
+                        <select class="form-select" th:field="*{pago}" id="pago" name="pago" required="requiered">
+                            <option th:each="sel : ${pagoList}" th:value="${sel.idPago}" th:text="${sel}"/>
+                        </select>
+                    </div>
+                    <div class="col-md-3">
+                        <br/>
+                        <button type="submit" class="btn btn-primary">Guardar</button>
+                    </div>
+                </div>
+            </div>
+            <input type="hidden" th:field="*{idOrden}"/>
+            <input type="hidden" th:field="*{fechaCreacion}"/>
+            <input type="hidden" th:field="*{estatus}"/>
+            <input type="hidden" th:field="*{usuario}"/>
+
+        </form>
+    </div>
+</main>
+<footer th:replace="~{page-template :: footer}"></footer>
+</body>
+</html>

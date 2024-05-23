@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      lang="es">
+<head th:replace="~{page-template :: head}"></head>
+</head>
+<body>
+<header th:replace="~{page-template :: header}"></header>
+<main class="container text-center opacity-75 shadow-lg p-3 mb-5 bg-body-tertiary rounded">
+    <h1 class="card-header"><strong><p th:text="${contenido}"></p></strong></h1>
+    <div class="card-body">
+        <form th:action="@{/pago/save}" th:object="${pago}" method="post">
+            <div th:if="${#fields.hasErrors('*')}" class='alert alert-danger' role="alert">
+                Verifique los siguientes errores
+                <ul>
+                    <li th:each="err : ${#fields.errors('*')}" th:text="${err}"/>
+                </ul>
+            </div>
+            <div class="row gx-5">
+                <div class="col-md-5">
+                    <div class="form-group">
+                        <label for="numeroTarjeta">Número Tarjeta</label>
+                        <input type="text" class="form-control" id="numeroTarjeta" name="numeroTarjeta"
+                               placeholder="No. Tarjeta" required
+                               th:value="${pago.numeroTarjeta}">
+                    </div>
+                    <div class="form-group">
+                        <label for="titularNombre">Nombre(s)</label>
+                        <input type="text" class="form-control" id="titularNombre" name="titularNombre"
+                               placeholder="Nombre(s)" required
+                               th:value="${pago.titularNombre}">
+                    </div>
+                    <div class="form-group">
+                        <label for="titularApellido">Apellidos</label>
+                        <input type="text" class="form-control" id="titularApellido" name="titularApellido"
+                               placeholder="Apellidos" required
+                               th:value="${pago.titularApellido}">
+                    </div>
+                    <div class="form-group">
+                        <label for="caducidad">caducidad</label>
+                        <input type="text" class="form-control" id="caducidad" name="caducidad"
+                               placeholder="Caducidad" required
+                               th:value="${pago.caducidad}">
+                    </div>
+                    <div class="form-group">
+                        <label for="cvv">cvv</label>
+                        <input type="text" class="form-control" id="cvv" name="cvv"
+                               placeholder="CVV" required
+                               th:value="${pago.cvv}">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="tipoDeTarjeta">Tipo de tarjeta</label>
+                        <select class="form-select" th:field="*{tipoDeTarjeta}" id="tipoDeTarjeta" name="tipoDeTarjeta" required="requiered">
+                            <option th:value="debito" th:text="Débito"/>
+                            <option th:value="credito" th:text="Crédito"/>
+                        </select>
+                    </div>
+
+                    <div class="col-md-3">
+                        <br/>
+                        <button type="submit" class="btn btn-primary">Guardar</button>
+                    </div>
+
+                </div>
+                <input type="hidden" name="idPago" th:field="*{idPago}"/>
+            </div>
+        </form>
+    </div>
+</main>
+<footer th:replace="~{page-template :: footer}"></footer>
+</body>
+</html>
