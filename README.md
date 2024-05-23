@@ -1,22 +1,9 @@
 # DIP_SPRING_SECURITY
-Diplomado UNAM - Spring Security
+Diplomado UNAM 
 
-This repository is for an example application built in [Spring Boot 3.2.3]
+En esta aplicación se tiene dos roles, USER y ADMIN
+El ADMIN tiene la facultad de agregar marcas, categorías y productos. Estos productos son puestos en el catálogo para poder ser visualizado por los usuarios.
 
-The application is a simple Spring Boot 3. It is used to help students learn how
-to use the Spring Framework with Spring Security Framework. 
-Step by step instructions and detailed explanations can be found in moodle.
+El USER tiene la posibilidad de agregar sus pagos y sus direcciones. También visualiza los productos del catálogo y los agrega al carrito. Cuando el usuario ya tiene todos los productos que quiere en su carrito este se confirma y se agrega el método de pago y la dirección de envío y se envía una orden de compra que puede ser administrada por un servicio externo.  
 
-As you work through the course, please feel free to fork this repository to your out GitHub repo. Most links contain links
-to source code changes. If you encounter a problem you can compare your code to the lesson code.
-
-## Getting Your Development Environment Setup
-### Recommended Versions
-| Recommended             | Reference                                                                                                                                                     | Notes                                                                                                  |
-|-------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------|
-| Oracle Java 17 JDK      | [Download]([https://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html](https://www.oracle.com/java/technologies/downloads/#java17) | Java 17 or higher is required for Spring Boot 3                                                        |
-| IntelliJ 2022 or Higher | [Download](https://www.jetbrains.com/idea/download/)                                                                                                          | Ultimate Edition recommended. Anyway, this runs in Community Edition                                   |
-| Maven 3.9.0 or higher   | [Download](https://maven.apache.org/download.cgi)                                                                                                             | [Installation Instructions](https://maven.apache.org/install.html)                                     |
-| Git 2.44 or higher      | [Download](https://git-scm.com/downloads)                                                                                                                     |                                                                                                        | 
-| Git GUI Clients         | [Downloads](https://git-scm.com/downloads/guis)                                                                                                               | Not required. But can be helpful if new to Git. SourceTree is a good option for Mac and Windows users. |
-
+![Flujo del sistema](/jugueteria_flujo_diagrama.png)
