@@ -1,4 +1,4 @@
-# DIP_SPRING_SECURITY
+# JUGUETERIA - PROYECTO FINAL 
 Diplomado UNAM 
 
 En esta aplicación se tiene dos roles, USER y ADMIN
